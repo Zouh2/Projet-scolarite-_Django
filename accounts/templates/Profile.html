@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load tags %}
+
+{% block title %}
+    PowerPack
+{% endblock %}
+
+{% block content %}
+<style>
+    /* Style pour centrer le formulaire en haut */
+    form {
+        position: absolute;
+        top: 40%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 80%; /* Vous pouvez ajuster la largeur comme vous le souhaitez */
+        max-width: 500px; /* Limitez la largeur maximale si nécessaire */
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Ombre pour le style */
+    }
+
+    /* Style pour rendre le bouton bleu */
+    button[type="submit"] {
+        background-color: blue;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+</style>
+
+
+{% if alert_message == 'success' %}
+    <div class="alert alert-success" role="alert">
+        Your profile was successfully updated!
+    </div>
+{% endif %}
+
+{% if alert_message == 'error' %}
+    <div class="alert alert-danger" role="alert">
+        Please correct the errors below.
+    </div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update</button>
+</form>
+{% endblock %}

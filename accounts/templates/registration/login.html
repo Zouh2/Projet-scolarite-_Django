@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load tags %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+{% if form.non_field_errors %}
+    {% for error in form.non_field_errors %}
+          <!-- Dialogue d'alerte -->
+    <div id="alertDialog" class="alert-dialog">
+        <div class="alert-content">
+            <span class="close-btn" onclick="closeDialog()">&times;</span>
+            <p>{{ error }}</p>
+        </div>
+    </div>
+
+    <script>
+        function closeDialog() {
+            document.getElementById('alertDialog').style.display = 'none';
+        }
+        window.onload = function() {
+            document.getElementById('alertDialog').style.display = 'block';
+        };
+    </script>
+    {% endfor %}
+{% endif %}
+  <div class="form-body without-side">
+        <div class="row">
+            <div class="img-holder">
+                <div class="bg"></div>
+                <div class="info-holder">
+                    <img src="images/graphic3.svg" alt="">
+                </div>
+            </div>
+            <div class="form-holder">
+                <div class="form-content">
+                    <div class="form-items" style="text-align: center;">
+                        <h3>Login to account </h3>
+                         <form method="post" class="form" action="{% url 'login' %}">
+                            {% csrf_token %}
+                        <p>Accès à l'outil le plus puissant Pour gérer tout ce qui touche aux paiements.</p>
+                            <input class="form-control" type="text" name="username" placeholder="nom " required>
+                            <input class="form-control" type="password" name="password" placeholder="mot de passe " required>
+                            <div class="form-button">
+                                <button id="submit" type="submit" class="ibtn">Login</button>
+                            </div>
+                             </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
